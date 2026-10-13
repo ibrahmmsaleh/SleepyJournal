@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SleepyJournal - Pelacak Kualitas Tidur</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌙 SleepyJournal</h1>
+            <p>Catat tidurmu, pahami ritme tubuhmu secara instan.</p>
+        </header>
+
+        <main class="grid">
+            <section class="card form-section" aria-labelledby="form-title">
+                <h2 id="form-title">Catat Tidur Semalam</h2>
+                <form action="/" method="POST" id="sleepForm">
+                    <div class="form-group">
+                        <label for="date">Tanggal Catatan</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sleep_time">Jam Mulai Tidur</label>
+                            <input type="time" id="sleep_time" name="sleep_time" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="wake_time">Jam Bangun Tidur</label>
+                            <input type="time" id="wake_time" name="wake_time" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mood">Suasana Hati Saat Bangun</label>
+                        <select id="mood" name="mood" required>
+                            <option value="" disabled selected hidden>Pilih kondisi tubuh...</option>
+                            <option value="Segar & Bertenaga 🤠">Segar & Bertenaga 🤠</option>
+                            <option value="Biasa Saja 😐">Biasa Saja 😐</option>
+                            <option value="Masih Mengantuk 🥱">Masih Mengantuk 🥱</option>
+                            <option value="Pusing/Lelah 😫">Pusing/Lelah 😫</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">Simpan ke Histori</button>
+                </form>
+            </section>
+
+            <section class="card history-section" aria-labelledby="history-title">
+                <h2 id="history-title">Histori Tidur Kamu</h2>
+                
+                {% if not history %}
+                    <div class="empty-state">
+                        <p>Belum ada data tidur yang tercatat.</p>
+                        <small>Silakan isi formulir di samping untuk melihat analisis kualitas tidurmu.</small>
+                    </div>
+                {% else %}
+                    <div class="history-list">
+                        {% for log in history %}
+                        <article class="history-item" style="border-left: 5px solid {{ log.color }}">
+                            <div class="item-main">
+                                <h3>{{ log.date }}</h3>
+                                <p>⏰ <strong>{{ log.sleep_time }}</strong> sampai <strong>{{ log.wake_time }}</strong> ({{ log.hours }} Jam)</p>
+                                <p class="mood-text">🎭 Kondisi: {{ log.mood }}</p>
+                            </div>
+                            <div class="item-status">
+                                <span class="badge" style="background-color: {{ log.color }}1a; color: {{ log.color }}; border: 1px solid {{ log.color }}">
+                                    {{ log.status }}
+                                </span>
+                            </div>
+                        </article>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dateInput = document.getElementById('date');
+            const form = document.getElementById('sleepForm');
+            const sleepTime = document.getElementById('sleep_time');
+            const wakeTime = document.getElementById('wake_time');
+
+            const today = new Date().toISOString().split('T');
+            dateInput.value = today[0];
+
+            form.addEventListener('submit', (e) => {
+                if (sleepTime.value === wakeTime.value) {
+                    e.preventDefault();
+                    alert('Jam tidur dan jam bangun tidak boleh sama persis!');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
