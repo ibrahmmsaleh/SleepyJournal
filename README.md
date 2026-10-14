@@ -28,7 +28,7 @@ A lightweight, user-friendly web application built with Python (Flask) to help y
 | 🎨 **CSS3** | Interface styling and layout |
 | 🔧 **Git** | Version control |
 | 🐙 **GitHub** | Repository hosting and code collaboration |
-| ☁️ **PythonAnywhere** | Web application deployment |
+| ☁️ **Versel** | Web application deployment |
 ---
 
 ## 📂 Project Structure
