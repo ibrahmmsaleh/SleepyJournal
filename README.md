@@ -5,7 +5,9 @@ A lightweight, user-friendly web application built with Python (Flask) to help y
 
 ## 🌐 Live Demo
 
-**Try the app right away—no installation required!**(https://sleepy-journal.vercel.app/)
+**Try the app right away—no installation required!**
+🔗 **[Student Task Manager — Open Website](https://sleepy-journal.vercel.app/)**
+
 
 
 ---
