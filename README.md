@@ -36,7 +36,7 @@ A lightweight, user-friendly web application built with Python (Flask) to help y
 ```text
 sleep-tracker/
 ├── app.py                # Main Flask application and routing logic
-├── requirements.txt          # Python dependencies
+├── requirements.txt      # Python dependencies
 ├── README.md             # Project documentation
 ├── static/
 │   └── style.css         # Application styling and layout
